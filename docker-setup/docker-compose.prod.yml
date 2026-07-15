@@ -1,0 +1,56 @@
+name: myapp
+
+# Production compose file for an EC2 instance talking to an external RDS
+# database. Differences from docker-compose.yml (local dev):
+#   - no `mysql` service — DB_HOST in .env points at the real RDS endpoint
+#   - no `node` service — front-end assets are built once at deploy time,
+#     not served from a live Vite dev server
+#   - APP_DEBUG should be false in .env
+
+services:
+  app:
+    build:
+      context: ..
+      dockerfile: docker-setup/Dockerfile
+    image: myapp-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ../:/var/www/html
+    env_file:
+      - ../.env
+    depends_on:
+      redis:
+        condition: service_started
+
+  nginx:
+    image: nginx:alpine
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      # - "443:443"   # add once TLS is set up (see ec2-deploy.md)
+    volumes:
+      - ../:/var/www/html:ro
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    depends_on:
+      - app
+
+  redis:
+    image: redis:alpine
+    restart: unless-stopped
+
+  queue:
+    build:
+      context: ..
+      dockerfile: docker-setup/Dockerfile
+    image: myapp-app
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ../:/var/www/html
+    env_file:
+      - ../.env
+    depends_on:
+      redis:
+        condition: service_started
+    command: php artisan queue:work --tries=3 --backoff=3

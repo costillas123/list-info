@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Laravel Setup Guide — Live Reference</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="shell">
+  <nav class="sidebar" aria-label="Guide sections">
+    <span class="brand">laravel-setup.ref</span>
+    <span class="brand-sub">Live from the .md files in this folder</span>
+    <span class="sync-badge" id="syncBadge"><span class="sync-dot"></span><span id="syncText">connecting…</span></span>
+
+    <div class="nav-group">
+      <details class="nav-details" open>
+        <summary class="nav-label">Laravel Setup</summary>
+        <ul id="navGuide" data-nav="Guide"></ul>
+      </details>
+    </div>
+    <div class="nav-group">
+      <details class="nav-details">
+        <summary class="nav-label">Docker</summary>
+        <ul id="navDocker" data-nav="Docker"></ul>
+      </details>
+    </div>
+    <div class="nav-group">
+      <details class="nav-details">
+        <summary class="nav-label">Reference</summary>
+        <ul id="navRef" data-nav="Reference"></ul>
+      </details>
+    </div>
+  </nav>
+
+  <main>
+    <header class="page-head">
+      <span class="kicker">Internal reference — Laravel on Ubuntu</span>
+      <h1>Laravel setup guide — from a clean Ubuntu server to a deployed app</h1>
+      <p class="lede">Bare-metal Nginx/PHP/MySQL, the Docker equivalent, and an EC2 + RDS deploy guide, all in one place. This page reads directly from your <code>.md</code> files each time it polls — edit and save any of them, and this view updates on its own within a couple seconds.</p>
+    </header>
+
+    <div class="stale-banner" id="staleBanner">
+      <span>⚠</span>
+      <span>Can't reach the source files over <code>fetch()</code>. This page needs to be served over <code>http://</code>, not opened as a <code>file://</code> path — see the note at the bottom of the page.</span>
+    </div>
+
+    <div id="sections"></div>
+
+    <footer>
+      Reads live from <code>nginx-laravel-setup/laravel-nginx-setup.md</code>, <code>support/envsample.md</code>, everything under <code>docker-setup/</code>, <code>phpscript.md</code>, and <code>ubontoscirpt.md</code> in this folder.
+      <br><br>
+      Browsers block a plain double-clicked HTML file from reading its neighbors, so this needs a tiny local server. From this folder run:
+      <br><code>python3 -m http.server 8000</code>
+      <br>then open <code>http://localhost:8000/guide.html</code>. Leave that command running — this page keeps polling the files as long as the server is up.
+    </footer>
+  </main>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
