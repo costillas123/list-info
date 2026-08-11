@@ -14,7 +14,8 @@
     { id: 'docker-env-ec2',     nav: 'Docker', title: '.env.ec2.example',              path: 'docker-setup/.env.ec2.example',       type: 'code', lang: '.env' },
 
     { id: 'mysql',        nav: 'Reference', title: '3. MySQL command reference',   path: 'phpscript.md',                 type: 'md'   },
-    { id: 'commands',     nav: 'Reference', title: '4. Ubuntu & Git command reference', path: 'ubontoscirpt.md',        type: 'md'   }
+    { id: 'commands',     nav: 'Reference', title: '4. Ubuntu & Git command reference', path: 'ubontoscirpt.md',        type: 'md'   },
+    { id: 'terraform',    nav: 'Reference', title: '5. Terraform remote state backend (S3 + DynamoDB)', path: 'terraform.md', type: 'md' }
   ];
   var POLL_MS = 1500;
   var cache = {};
